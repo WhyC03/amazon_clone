@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -26,7 +28,12 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
       ),
-      validator: (val){},
+      validator: (val){
+        if(val == null || val.isEmpty){
+          return 'Enter your $hintText';
+        }
+        return null;
+      },
     );
   }
 }

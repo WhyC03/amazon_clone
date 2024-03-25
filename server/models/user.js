@@ -1,37 +1,38 @@
-const mongoose = require('mongoose');
-const authRouter = require('../routes/auth');
+const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({
-    name: {
-        required: true,
-        type: String,
-        trim: true,
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  email: {
+    required: true,
+    type: String,
+    trim: true,
+    validate: {
+      validator: (value) => {
+        const re =
+          /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        return value.match(re);
+      },
+      message: "Please enter a valid email address",
     },
-    email: {
-        requied: true,
-        type: String,
-        trim: true,
-        validate: {
-           validator: (value) => {
-            const re =/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-            return value.match(re);
-           },
-           message: "Please enter a valid Email Address" ,
-        },
-    },
-    password: {
-        required: true,
-        type: String,
-    },
-    address: {
-        type: String,
-        default: '',
-    },
-    type: {
-        type: String,
-        default: 'user',
-    }
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  address: {
+    type: String,
+    default: "",
+  },
+  type: {
+    type: String,
+    default: "user",
+  },
 });
 
-const User =  mongoose.model('User', userSchema);
+
+const User = mongoose.model('User', userSchema);
 module.exports = User;

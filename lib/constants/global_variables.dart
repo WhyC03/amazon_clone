@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+// enter your IP Address
 String uri = 'http://<yourip>:3000';
 
 class GlobalVariables {
